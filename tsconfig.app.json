@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    // 保持其他选项不变
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "moduleResolution": "node",
+    // 其他选项...
+  },
+  "include": [
+    // 你可能需要在这里指定要包含的文件或文件夹
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    // 指定要排除的文件或文件夹
+    "node_modules"
+  ]
+}
