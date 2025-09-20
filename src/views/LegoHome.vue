@@ -4,20 +4,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import TemplateList from '../components/TemplateList.vue'
-const testData =[
-    { id:1, src: '../src/assets/list(1).webp',title:'前端架构师直播海报' },
-    { id: 2, src: '../src/assets/list(2).webp', title: '前端架构师直播海报' },
-    { id: 3, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' },
-    { id: 4, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' },
-    { id: 5, src: '../src/assets/list(4).webp', title: '前端架构师直播海报' }  , 
-    { id: 6, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' }
-]
-const router = useRouter()
-setTimeout(() => {
-    router.push({name:'template',params:{id:1}})
-},2000)
+const store = useStore()
+const testData = computed(()=>store.state.templates)
 </script>
 <style scoped>
 .page-title {

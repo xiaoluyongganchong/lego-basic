@@ -18,8 +18,8 @@
             <template #cover>
               <img
                 alt="example"
-                :src="item.src"
-                class="main-img"
+                :src="item.coverImg"
+                class="coverImg"
               >
               <a-button
                 type="primary"
@@ -32,8 +32,8 @@
             <a-card-meta :title="item.title">
               <template #description>
                 <div class="description-detail">
-                  <span>作者: Test</span>
-                  <span>0</span>
+                  <span>作者: {{ item.author }}</span>
+                  <span>{{ item.copieCount }}</span>
                 </div>
               </template>
             </a-card-meta>
@@ -44,21 +44,17 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, PropType } from 'vue'
+import { TemplateProps } from '../store/index'
 export default defineComponent({
     name: 'TemplateList',
-    setup() {
-        const list = ref([
-            { id:1, src: '../src/assets/list(1).webp',title:'前端架构师直播海报' },
-            { id: 2, src: '../src/assets/list(2).webp', title: '前端架构师直播海报' },
-            { id: 3, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' },
-            { id: 4, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' },
-            { id: 5, src: '../src/assets/list(4).webp', title: '前端架构师直播海报' }  , 
-            { id: 6, src: '../src/assets/list(3).webp', title: '前端架构师直播海报' }
-        ])
-        return {
-            list
+    props: {
+        list: {
+            type: Array as PropType<TemplateProps[]>,
+            required:true
         }
+    },
+    setup() {
     }
 })
 </script>
@@ -82,7 +78,7 @@ export default defineComponent({
   margin: 0;
   padding: 0;
 }
-.main-img {
+.coverImg {
   max-width: 100%; /* 限制图片最大宽度 */
   max-height: 100%; /* 限制图片最大高度 */
   object-fit: cover;
@@ -91,7 +87,7 @@ export default defineComponent({
 }
 
 /* 悬停时显示黑色遮罩 */
-.ant-card-cover:hover .main-img {
+.ant-card-cover:hover .coverImg {
   filter: brightness(0.5);
 }
 

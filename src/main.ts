@@ -3,7 +3,8 @@ import Antd from 'ant-design-vue';
 import App from './App.vue';
 import 'ant-design-vue/dist/reset.css';
 import router from './routes/index';
+import store from './store/index'
 
 const app = createApp(App);
-app.use(Antd).use(router);
+app.use(Antd).use(router).use(store);
 app.mount('#app');
