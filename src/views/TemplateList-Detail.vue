@@ -85,12 +85,12 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { GloabalProps } from '../store/index'
+import { GloabalProps,TemplateProps } from '../store/index'
 const text = ref('https://www.antdv.com/');
 const store = useStore<GloabalProps>()
 const route = useRoute()
 const currentId = route.params.id as string
-const template = computed(() => store.getters.getTempalteId(parseInt(currentId)))
+const template = computed<TemplateProps>(() => store.getters.getTempalteId(parseInt(currentId)))
 </script>
 <style scoped>
 .page-title {
