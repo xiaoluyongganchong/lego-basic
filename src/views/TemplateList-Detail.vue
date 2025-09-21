@@ -12,7 +12,7 @@
         }"
       >
         <img
-          src="../assets/list(1).webp"
+          :src="template?.coverImg"
           alt="示例图片"
           :style="{
             maxWidth: '100%', /* 最大宽度不超过容器 */
@@ -27,7 +27,7 @@
             <template #title>
               <div class="card-title-container">
                 <h3 class="main-title">
-                  前端架构师直播海报
+                  {{ template?.title }}
                 </h3>
                 <span class="sub-title">未命名作品</span>
               </div>
@@ -44,7 +44,7 @@
                     class="author-avatar"
                   >
                   <p class="author-text">
-                    该模板由 xiaoming 创作
+                    该模板由 {{ template?.author }} 创作
                   </p>
                 </div>
                 <p style="margin-top: 10px;">
@@ -82,8 +82,15 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import { GloabalProps } from '../store/index'
 const text = ref('https://www.antdv.com/');
+const store = useStore<GloabalProps>()
+const route = useRoute()
+const currentId = route.params.id as string
+const template = computed(() => store.getters.getTempalteId(parseInt(currentId)))
 </script>
 <style scoped>
 .page-title {

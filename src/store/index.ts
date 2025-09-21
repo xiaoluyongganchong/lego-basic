@@ -27,6 +27,20 @@ const store = createStore<GloabalProps>({
     state: {
         user: { isLogin: false },
         templates:testData
+    },
+    mutations: {
+        login(state) {
+            state.user = { ...state.user, isLogin: true, userName: 'xiaoming' }
+        },
+        logout(state) {
+            state.user = { isLogin: false }
+        }
+    },
+    getters: {
+        getTempalteId: (state) => (id:number) => {
+            return state.templates.find(t => t.id === id)
+        }
     }
 })
+
 export default store
