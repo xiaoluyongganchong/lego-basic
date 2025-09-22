@@ -4,19 +4,14 @@ export interface UserProps {
   isLogin: boolean,
   userName?:string
 }
-export interface UsersPops {
-  data:UserProps
-}
-const user:Module<UsersPops,GloabalProps> = {
-    state: {
-        data: { isLogin: false }
-    },
+const user:Module<UserProps,GloabalProps> = {
     mutations: {
         login(state) {
-            state.data = { ...state.data, isLogin: true, userName: 'xiaoming' }
+            state.isLogin = true
+            state.userName = 'xiaoming'
         },
         logout(state) {
-            state.data = { isLogin: false }
+            state.isLogin = false
         }
     }
 }

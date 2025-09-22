@@ -26,7 +26,7 @@ const templates: Module<TemplatesProps,GloabalProps> = {
         data:testData
     },
     getters: {
-        getTempalteId: (state,getters,rootState) => (id:number) => {
+        getTempalteId: (state) => (id:number) => {
             return state.data.find(t => t.id === id)
         }
     }

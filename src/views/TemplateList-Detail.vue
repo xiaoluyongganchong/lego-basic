@@ -85,7 +85,8 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { GloabalProps,TemplateProps } from '../store/index'
+import { GloabalProps } from '../store/index'
+import { TemplateProps } from '../store/templates'
 const text = ref('https://www.antdv.com/');
 const store = useStore<GloabalProps>()
 const route = useRoute()

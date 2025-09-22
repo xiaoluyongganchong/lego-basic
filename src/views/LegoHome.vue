@@ -8,7 +8,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import TemplateList from '../components/TemplateList.vue'
 const store = useStore()
-const testData = computed(()=>store.state.templates)
+const testData = computed(()=>store.state.templates.data)
 </script>
 <style scoped>
 .page-title {

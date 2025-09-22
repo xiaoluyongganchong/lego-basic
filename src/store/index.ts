@@ -1,12 +1,12 @@
 import { createStore } from 'vuex'
-import templates,{ TemplateProps } from './templates'
+import templates,{ TemplatesProps } from './templates'
 import user, { UserProps } from './user'
 export interface GloabalProps {
   user: UserProps
-  templates: TemplateProps
+  templates: TemplatesProps
 }
 
-const store = createStore<GloabalProps>({
+const store = createStore({
     modules: {
         user,
         templates
