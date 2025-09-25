@@ -22,7 +22,14 @@
             minHeight: 'calc(100vh - 128px)',
             width: '80%',
           }"
-        />
+        >
+          <component
+            :is="component.name"
+            v-for="component in components"
+            :key="component.id"
+            v-bind="component.props"
+          />
+        </a-layout-content>
       </a-layout>
       <a-layout-sider
         width="400"
@@ -34,7 +41,24 @@
     </a-layout>
   </a-layout>
 </template>
-<script lang="ts" setup>
+<script lang="ts">
+import { useStore } from 'vuex'
+import { computed,defineComponent } from 'vue'
+import { GloabalProps } from '../store/index'
+import LText from '../components/LText.vue'
+export default defineComponent({
+    name: 'LegoEditor',
+    components: {
+        LText
+    },
+    setup() {
+        const store = useStore<GloabalProps>()
+        const components = computed(() => store.state.editor.components)
+        return {
+            components
+        }
+    }
+})
 </script>
 <style scoped>
 .ant-layout {
