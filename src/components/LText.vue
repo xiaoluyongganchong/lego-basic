@@ -6,6 +6,7 @@
     @click="clickUrl"
   >
     {{ text }}
+    <slot />
   </component>
 </template>
 <script lang="ts">

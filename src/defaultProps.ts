@@ -1,6 +1,43 @@
 
 import { without, mapValues } from 'lodash-es'
-export const commonDefaultProps = {
+export interface CommmonComponnetProps  {
+         // actions
+     actionType: string,
+     url:string,
+     // size
+     height: string,
+     width: string,
+     paddingLeft: string,
+     paddingRight: string,
+     paddingTop: string,
+     paddingBottom: string,
+     // border type
+     borderStyle: string,
+     borderColor:string,
+     borderWidth: string,
+     borderRadius:string
+     // shadow and opacity
+     boxShadow: string,
+     opacity: number,
+     // position and x,y
+     position: string,
+     left: string,
+     top: string,
+     right: string
+}
+export interface TextComponentProps extends  CommmonComponnetProps{
+    text: string,
+    fontSize: string,
+    fontFamily:string,
+    fontWeight: string,
+    fontStyle: string,
+    textDecoration: string,
+    lineHeight: string,
+    textAlign: string,
+    color: string,
+    backgroundColor: string
+}
+export const commonDefaultProps:CommmonComponnetProps = {
     // actions
     actionType: '',
     url: '',
@@ -44,10 +81,10 @@ export const textDefaultProps = {
 export const textStylePropsName = without(Object.keys(textDefaultProps),'actionType','url','text')
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const transformtoComponentProps = <T  extends { [key: string]: any }>(props: T) => {
+export const transformtoComponentProps = (props: TextComponentProps) => {
     return mapValues(props, (item) => {
         return {
-            type: item.constructor,
+            type: item.constructor as StringConstructor,
             default:item
         }
     })

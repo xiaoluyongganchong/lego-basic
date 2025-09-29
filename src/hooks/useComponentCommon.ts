@@ -1,8 +1,8 @@
 import { pick } from 'lodash-es'
 import { computed } from 'vue'
+import { TextComponentProps } from '../defaultProps'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useComponentCommon = <T extends { [key: string]: any }>(props : T, picks :string[] ) => {
+const useComponentCommon = (props : TextComponentProps, picks :string[] ) => {
     const styleProps = computed(() => pick(props, picks))
     const clickUrl = () => {
         if (props.actionType === 'url' && props.url) {

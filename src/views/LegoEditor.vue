@@ -3,10 +3,17 @@
     <a-layout style="flex: 1;">
       <a-layout-sider
         width="400"
-        style="background: yellow; display: flex; align-items: center; justify-content: center;" 
-        theme="light"
+        style="background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;"
+        theme="light" 
       >
         组件列表
+        <br><br>
+        <div style="width: auto;">
+          <ComponentList
+            :list="defaultTextTemplates "
+            @on-item-click="addItem"
+          />
+        </div>
       </a-layout-sider>
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
@@ -23,20 +30,39 @@
             width: '80%',
           }"
         >
-          <component
-            :is="component.name"
+          <EditorWrapper
             v-for="component in components"
+            :id="component.id"
             :key="component.id"
-            v-bind="component.props"
-          />
+            @set-active="setActive"
+          >
+            <component
+              :is="component.name"
+              v-bind="component.props"
+            >
+              <a-button
+                type="primary"
+                shape="circle"
+                size="small"
+                @click="removeItem(component.id)"
+              >
+                X
+              </a-button>
+            </component>
+          </EditorWrapper>
         </a-layout-content>
       </a-layout>
       <a-layout-sider
         width="400"
-        style="background: purple; display: flex; align-items: center; justify-content: center;" 
+        style="background: #fff; display: flex; align-items: center; justify-content: center;" 
         theme="light"
       >
         组件属性
+        <PropsTable 
+          v-if="currentElement && currentElement.props"
+          :props="TextComponentProps"
+        />
+        <pre>{{ currentElement?.props }}</pre>
       </a-layout-sider>
     </a-layout>
   </a-layout>
@@ -46,21 +72,52 @@ import { useStore } from 'vuex'
 import { computed,defineComponent } from 'vue'
 import { GloabalProps } from '../store/index'
 import LText from '../components/LText.vue'
+import  PropsTable from '../components/PropsTable.vue'
+import ComponentList from '../components/ComponentList.vue'
+import { defaultTextTemplates } from '../defaultTemplates'
+import EditorWrapper from '../components/EditorWrapper.vue'
+import { ComponentsData } from '../store/editor'
+import { TextComponentProps } from '../defaultProps'
+
 export default defineComponent({
     name: 'LegoEditor',
     components: {
-        LText
+        ComponentList,
+        LText,
+        EditorWrapper,
+        PropsTable
     },
     setup() {
         const store = useStore<GloabalProps>()
         const components = computed(() => store.state.editor.components)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const addItem = (props:any) => {
+            store.commit('addComponent',props)
+        }
+        const removeItem = (id:string) => {
+            store.commit('removeComponent',id)
+        }
+        const setActive = (id:string) => {
+            store.commit('setActive',id)
+        }
+        const currentElement = computed<ComponentsData>(() => store.getters.getCurrentElement || null)
+        const TextComponentProps = computed(()=>currentElement.value.props as TextComponentProps)
         return {
-            components
+            components,
+            addItem,
+            defaultTextTemplates,
+            removeItem,
+            setActive,
+            currentElement,
+            TextComponentProps
         }
     }
 })
 </script>
 <style scoped>
+.component-list {
+  display: inline-block;
+}
 .ant-layout {
   margin: 0 !important;
   padding: 0 !important;
