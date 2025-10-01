@@ -54,13 +54,14 @@
       </a-layout>
       <a-layout-sider
         width="400"
-        style="background: #fff; display: flex; align-items: center; justify-content: center;" 
+        style="background: #fff; display: flex; align-items: center; " 
         theme="light"
       >
         组件属性
         <PropsTable 
           v-if="currentElement && currentElement.props"
           :props="TextComponentProps"
+          @change="handleChange"
         />
         <pre>{{ currentElement?.props }}</pre>
       </a-layout-sider>
@@ -100,6 +101,11 @@ export default defineComponent({
         const setActive = (id:string) => {
             store.commit('setActive',id)
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleChange = (e: any) => {
+            store.commit('updateComponent',e)
+            console.log(e)
+        }
         const currentElement = computed<ComponentsData>(() => store.getters.getCurrentElement || null)
         const TextComponentProps = computed(()=>currentElement.value.props as TextComponentProps)
         return {
@@ -109,7 +115,8 @@ export default defineComponent({
             removeItem,
             setActive,
             currentElement,
-            TextComponentProps
+            TextComponentProps,
+            handleChange
         }
     }
 })
@@ -122,7 +129,7 @@ export default defineComponent({
   margin: 0 !important;
   padding: 0 !important;
 }
-::v-deep .center {
+:deep .center {
   text-align: center;
   width: 100%; /* 确保占满整个面包屑区域 */
 }

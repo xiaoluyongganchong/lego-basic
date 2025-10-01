@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ]
+    "noImplicitAny": false,
+    "allowJs": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "types": ["vue"],
+    "lib": ["ESNext", "DOM"],
+    "checkJs": false,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["types/*"]
+    }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

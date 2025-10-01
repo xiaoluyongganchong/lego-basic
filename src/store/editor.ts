@@ -1,7 +1,7 @@
-import { GloabalProps } from './index'
+import { GloabalProps } from './index.js'
 import { Module } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
-import { TextComponentProps } from '../defaultProps'
+import { TextComponentProps } from '../defaultProps.js'
 
 export interface EditorProps {
   //供之间编辑器渲染的数组
@@ -22,9 +22,9 @@ export interface ComponentsData {
 }
 
 export const testComponent: ComponentsData[] = [
-    { id: uuidv4(), name: 'l-text', props: { text: 'hello1', fontSize: '10px'} },
-    { id: uuidv4(), name: 'l-text', props: { text: 'hello2', fontSize: '20px',color:'red'} },
-    { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '30px',actionType:'url',url:'wwww.baidu.com'} }  
+    { id: uuidv4(), name: 'l-text', props: { text: 'hello1', fontSize: '10px',fontFamily:'',textAlign:'左'} },
+    { id: uuidv4(), name: 'l-text', props: { text: 'hello2', fontSize: '20px',color:'red',lineHeight:'1',fontFamily:''} },
+    { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '30px',actionType:'url',url:'wwww.baidu.com',lineHeight:'2'} }  
 ]
 
 const editor: Module<EditorProps, GloabalProps> = {
@@ -46,6 +46,12 @@ const editor: Module<EditorProps, GloabalProps> = {
         },
         setActive(state, currentId: string) {
             state.currentElement = currentId 
+        },
+        updateComponent(state, { value, key }) {
+            const updatedComponent = state.components.find((component) => component.id === state.currentElement)
+            if (updatedComponent) {
+                updatedComponent.props[key as keyof TextComponentProps] = value
+            }
         }
     },
     getters: {
