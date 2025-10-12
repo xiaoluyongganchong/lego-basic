@@ -1,12 +1,14 @@
 {
   "name": "vue3-basic",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite",
+    "serve": "vue-cli-service serve",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "test:unit": "vue-cli-service test:unit",
+    "dev": "vite",
+    "preview": "vite preview",
+     "test": "vitest"
   },
   "dependencies": {
     "ant-design-vue": "^4.2.6",
@@ -16,27 +18,30 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.3",
     "@eslint/css": "^0.11.0",
     "@eslint/js": "^9.35.0",
+    "@testing-library/jest-dom": "^6.9.1",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-service": "^5.0.9",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^8.57.1",
     "eslint-plugin-vue": "^9.33.0",
     "globals": "^16.3.0",
-    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "jsdom": "^27.0.0",
     "less": "^4.4.1",
-    "typescript": "~5.8.3",
+    "ts-jest": "^27.0.4",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.42.0",
     "vite": "^7.1.5",
     "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^3.2.4",
     "vue-tsc": "^3.0.5"
-  },
-  "editor.quickSuggestions": {
-    "other": false,
-    "comments": false,
-    "strings": false
   },
   "compilerOptions": {
     "target": "es6",
@@ -46,9 +51,20 @@
     ],
     "module": "esnext"
   },
+  "editor.parameterHints.enabled": false,
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggestOnTriggerCharacters": false,
   "exclude": [
     "node_modules"
   ],
-  "editor.suggestOnTriggerCharacters": false,
-  "editor.parameterHints.enabled": false
+  "type": "module",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
 }
