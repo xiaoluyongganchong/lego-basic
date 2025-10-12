@@ -5,15 +5,15 @@
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,
+    "jsx":"preserve",
     "skipLibCheck": true,
     "isolatedModules": true,
+    "noImplicitAny": false ,
     "lib": [
       "ESNext",
       "DOM"
     ],
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals","node"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.vue", "tests/**/*.ts"]
 }

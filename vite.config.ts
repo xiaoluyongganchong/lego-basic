@@ -17,7 +17,12 @@ export default defineConfig({
   test: {
     globals: true,            // 允许使用全局 test / expect
     environment: 'jsdom',     // 模拟浏览器环境
-    include: ['tests/unit/**/*.spec.js'], // 测试文件路径
-    setupFiles: './tests/setup.js'       // 可选，初始化测试环境
+   include: ['tests/unit/**/*.spec.{js,ts}'],  // 测试文件路径
+    setupFiles: './tests/setup.js',       // 可选，初始化测试环境
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.{idea,git,cache,temp}/**'
+    ]
   }
 })

@@ -1,6 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
-
+import { vi, describe, it, expect } from 'vitest'
+import  flushPromises  from 'flush-promises'
+import axios from 'axios'
+vi.mock('axios')
+const mockAxios = axios as unknown as { get: vi.Mock; post: vi.Mock }
 describe('HelloWorld.vue', () => {
   it('renders props.msg when passed', () => {
     // 创建组件实例并传入 props
@@ -33,5 +37,18 @@ describe('HelloWorld.vue', () => {
     console.log(wrapper.emitted())
     expect(wrapper.emitted()).toHaveProperty('send')
     expect(wrapper.emitted('send')[0][0]).toBe(todoContent)
+  })
+  it.only('should load user message when click the load button', async () => {
+    const msg = 'new message'
+const wrapper = shallowMount(HelloWorld, {
+  props: { msg }
+})
+   mockAxios.get = vi.fn().mockResolvedValue({ data: { username: 'xiaoming' } })
+    await wrapper.get('.loadUser').trigger('click')
+    expect(mockAxios.get).toHaveBeenCalled()
+    expect(wrapper.find('.loading').exists()).toBeTruthy()
+    await flushPromises()
+    expect(wrapper.find('.loading').exists()).toBeFalsy()
+    expect(wrapper.get('.userName').text()).toBe('xiaoming')
   })
 })

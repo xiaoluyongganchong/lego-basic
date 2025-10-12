@@ -21,11 +21,36 @@
       {{ item }}
     </li>
   </ul>
+  <button
+    class="loadUser"
+    @click="loadUser"
+  >
+    load
+  </button>
+  <p
+    v-if="user.loading"
+    class="loading"
+  >
+    loading
+  </p>
+  <div
+    v-else
+    class="userName"
+  >
+    {{ user.data && user.data.username }}
+  </div>
+  <p
+    v-if="user.error"
+    class="error"
+  >
+    error!
+  </p>
   <Hello msg="1234" />
 </template>
-<script>
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref, reactive } from 'vue'
 import Hello from './Hello.vue'
+import axios from 'axios'
 export default defineComponent({
     name: 'HelloWorld',
     components: {
@@ -41,7 +66,13 @@ export default defineComponent({
     setup(props,context) {
         const count = ref(0)
         const todo = ref('')
-        const todos = ref([])
+        const todos = ref<string[]>([])
+        const user = reactive({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data: null as any,
+            loading: false,
+            error:false
+        })
         const setCount = () => {
             count.value++
         }
@@ -51,12 +82,24 @@ export default defineComponent({
                 context.emit('send',todo.value)
             }
         }
+        const loadUser = () => {
+            user.loading = true
+            axios.get('https://jsonplaceholder.typicode.com/posts/1').then(res => {
+                user.data = res.data
+            }).catch(() => {
+                user.error = true
+            }).finally(() => {
+                user.loading = false
+            })
+        } 
         return {
             count,
             todo,
             todos,
             setCount,
-            addTodo
+            addTodo,
+            user,
+            loadUser
         }
     }
 })
