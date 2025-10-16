@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -8,12 +9,14 @@
     "jsx":"preserve",
     "skipLibCheck": true,
     "isolatedModules": true,
-    "noImplicitAny": false ,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
-    "types": ["vitest/globals","node"]
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "vite-plugin-eslint": ["types/vite-plugin-eslint.d.ts"]
+    },
+    "lib": ["ESNext", "DOM"],
+    "types": ["vite/client", "vitest/globals", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "tests/**/*.ts"]
 }
