@@ -1,0 +1,13 @@
+[33mcommit 3bcdd644286e9798a0126eb84e6c48021891671a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/init-test[m[33m, [m[1;32mmaster[m[33m, [m[1;32mfeature/router[m[33m)[m
+Author: taizi <3424329558@qq.com>
+Date:   Mon Sep 22 10:45:25 2025 +0800
+
+    fix Vuex namplaces and state access bug
+
+README.md
+src/components/TemplateList.vue
+src/store/index.ts
+src/store/templates.ts
+src/store/user.ts
+src/views/LegoHome.vue
+src/views/TemplateList-Detail.vue
