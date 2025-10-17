@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
-import templates,{ TemplatesProps } from './templates'
-import user, { UserProps } from './user'
 import editor, { EditorProps } from './editor'
+import user, { UserProps } from './user'
+import templates, { TemplatesProps } from './templates'
 export interface GloabalProps {
   user: UserProps
   templates: TemplatesProps
@@ -9,11 +9,10 @@ export interface GloabalProps {
 }
 
 const store = createStore({
-    modules: {
-        user,
-        templates,
-        editor
-    }
+  modules: {
+    user,
+    editor,
+    templates
+  }
 })
-
 export default store
