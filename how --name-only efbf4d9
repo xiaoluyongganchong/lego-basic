@@ -1,0 +1,13 @@
+[33mcommit 3bde66947bbb11eff43f794f2449567ee227e2dd[m
+Author: taizi <3424329558@qq.com>
+Date:   Sun Sep 21 12:41:12 2025 +0800
+
+    add mutations and getters function
+
+src/components/TemplateList.vue
+src/components/UserProfile.vue
+src/routes/index.ts
+src/store/index.ts
+src/views/Index.vue
+src/views/Setting.vue
+src/views/TemplateList-Detail.vue
