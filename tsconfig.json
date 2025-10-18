@@ -16,7 +16,8 @@
       "vite-plugin-eslint": ["types/vite-plugin-eslint.d.ts"]
     },
     "lib": ["ESNext", "DOM"],
-    "types": ["vite/client", "vitest/globals", "node"]
+     "types": ["vite/client", "vitest/globals", "node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "tests/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/store/**/*.ts", "tests/**/*.ts"]
+
 }

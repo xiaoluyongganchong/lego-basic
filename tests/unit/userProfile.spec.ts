@@ -2,7 +2,7 @@ import UserProfile from '@/components/UserProfile.vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { message } from 'ant-design-vue'
 import { vi } from 'vitest'
-import store from '@/store/index'
+import store from '@/store/index.ts'
 
 let wrapper: VueWrapper<any>
 let mockedRoputes:string[] = []

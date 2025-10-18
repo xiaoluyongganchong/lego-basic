@@ -1,4 +1,4 @@
-import { GloabalProps } from './index.js'
+import { GlobalProps } from './index.js'
 import { Module } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
 import { TextComponentProps } from '../defaultProps.js'
@@ -27,12 +27,15 @@ export const testComponent: ComponentsData[] = [
     { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '30px',actionType:'url',url:'wwww.baidu.com',lineHeight:'2'} }  
 ]
 
-const editor: Module<EditorProps, GloabalProps> = {
+const editor: Module<EditorProps, GlobalProps> = {
     state: {
         components: testComponent,
         currentElement : ""
     },
     mutations: {
+        setActive(state, currentId: string) {
+            state.currentElement = currentId 
+        },
         addComponent(state, props) {
             const newComponent: ComponentsData = {
                 props,
@@ -41,17 +44,14 @@ const editor: Module<EditorProps, GloabalProps> = {
             }
             state.components.push(newComponent)
         },
-        removeComponent(state,id) {
-            state.components = state.components.filter(component=>component.id !== id)
-        },
-        setActive(state, currentId: string) {
-            state.currentElement = currentId 
-        },
         updateComponent(state, { value, key }) {
             const updatedComponent = state.components.find((component) => component.id === state.currentElement)
             if (updatedComponent) {
                 updatedComponent.props[key as keyof TextComponentProps] = value
             }
+        },
+        removeComponent(state,id) {
+            state.components = state.components.filter(component=>component.id !== id)
         }
     },
     getters: {

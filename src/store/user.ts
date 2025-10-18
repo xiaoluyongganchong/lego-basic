@@ -1,10 +1,10 @@
 import { Module } from 'vuex'
-import { GloabalProps } from './index'
+import { GlobalProps } from './index.ts'
 export interface UserProps {
   isLogin: boolean,
   userName?:string
 }
-const user:Module<UserProps,GloabalProps> = {
+const user:Module<UserProps,GlobalProps> = {
     mutations: {
         login(state) {
             state.isLogin = true

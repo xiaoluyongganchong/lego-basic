@@ -1,5 +1,5 @@
 import { Module } from 'vuex'
-import { GloabalProps } from './index'
+import { GlobalProps } from './index.ts'
 export interface TemplateProps {
   id: number
   title: string
@@ -8,7 +8,7 @@ export interface TemplateProps {
   copieCount:number
 }
 
-const testData : TemplateProps[] = [
+export const testData : TemplateProps[] = [
     { id:1, coverImg: '../src/assets/list(1).webp',title:'前端架构师直播海报' , author:'xioaming',copieCount:1},
     { id: 2, coverImg: '../src/assets/list(2).webp', title: '前端架构师直播海报', author:'xioaming',copieCount:1},
     { id: 3, coverImg: '../src/assets/list(3).webp', title: '前端架构师直播海报', author:'xioaming',copieCount:1},
@@ -21,7 +21,7 @@ export interface TemplatesProps {
   data: TemplateProps[]
 }
 
-const templates: Module<TemplatesProps,GloabalProps> = {
+const templates: Module<TemplatesProps,GlobalProps> = {
     state: {
         data:testData
     },
