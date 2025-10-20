@@ -1,5 +1,6 @@
 import { VNode  } from 'vue'
 import { TextComponentProps } from './defaultProps.js'
+
 export interface PropsToForm {
   component: string,
   value?: string,
@@ -75,5 +76,13 @@ export const mapPropsToForm: PropsToForms = {
             ...fontFamilyOptions
         ],
         extraProps:{size:'large'}
+    },
+    color: {
+        component: 'color-picker',
+        text:'字体颜色'
+    },
+    iconSwitch: {
+        component: 'icon-switch',
+        text:'图标切换'
     }
 }

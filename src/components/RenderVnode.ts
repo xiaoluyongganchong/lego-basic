@@ -2,13 +2,13 @@ import { defineComponent } from 'vue'
 
 const renderVue = defineComponent({
     props: {
-        Vnode: {
+        vNode: {
             type: [Object, String],
             required:true
         }
     },
     render() {
-        return this.Vnode
+        return this.vNode
     }
 })
 export default renderVue

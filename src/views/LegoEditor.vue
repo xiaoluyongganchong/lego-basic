@@ -71,7 +71,7 @@
 <script lang="ts">
 import { useStore } from 'vuex'
 import { computed,defineComponent } from 'vue'
-import { GloabalProps } from '../store/index'
+import { GlobalProps } from '../store/index'
 import LText from '../components/LText.vue'
 import  PropsTable from '../components/PropsTable.vue'
 import ComponentList from '../components/ComponentList.vue'
@@ -89,7 +89,7 @@ export default defineComponent({
         PropsTable
     },
     setup() {
-        const store = useStore<GloabalProps>()
+        const store = useStore<GlobalProps>()
         const components = computed(() => store.state.editor.components)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const addItem = (props:any) => {

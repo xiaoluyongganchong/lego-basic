@@ -35,7 +35,8 @@ export interface TextComponentProps extends  CommmonComponnetProps{
     lineHeight: string,
     textAlign: string,
     color: string,
-    backgroundColor: string
+    backgroundColor: string,
+    iconSwitch:string
 }
 export const commonDefaultProps:CommmonComponnetProps = {
     // actions
@@ -75,6 +76,7 @@ export const textDefaultProps = {
     textAlign: 'left',
     color: '#000000',
     backgroundColor: '',
+    iconSwitch:'B',
     ...commonDefaultProps
 };
 

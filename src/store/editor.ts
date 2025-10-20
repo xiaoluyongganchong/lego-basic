@@ -22,8 +22,8 @@ export interface ComponentsData {
 }
 
 export const testComponent: ComponentsData[] = [
-    { id: uuidv4(), name: 'l-text', props: { text: 'hello1', fontSize: '10px',fontFamily:'',textAlign:'左'} },
-    { id: uuidv4(), name: 'l-text', props: { text: 'hello2', fontSize: '20px',color:'red',lineHeight:'1',fontFamily:''} },
+    { id: uuidv4(), name: 'l-text', props: { text: 'hello1', fontSize: '10px',color:'#000000',fontFamily:'',textAlign:'左'} },
+    { id: uuidv4(), name: 'l-text', props: { text: 'hello2', fontSize: '20px',color:'red',lineHeight:'1',fontFamily:'',iconSwitch:'加粗'} },
     { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '30px',actionType:'url',url:'wwww.baidu.com',lineHeight:'2'} }  
 ]
 
@@ -52,7 +52,7 @@ const editor: Module<EditorProps, GlobalProps> = {
         },
         removeComponent(state,id) {
             state.components = state.components.filter(component=>component.id !== id)
-        }
+        },
     },
     getters: {
         getCurrentElement: (state) => {

@@ -9,5 +9,5 @@ declare module 'vite-plugin-eslint' {
   }
 
   function eslintPlugin(options?: Options): Plugin;
-  export default eslintPlugin;
+  export default function eslintPlugin(options?: Record<string, any>): Plugin
 }

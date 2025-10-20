@@ -28,7 +28,7 @@
               :key="k"
               :value="option.value"
             >
-              <renderVue :Vnode="option.text" />
+              <renderVue :v-node="option.text" />
             </component>
           </template>
         </component>
@@ -42,6 +42,8 @@ import { reduce } from 'lodash-es'
 import { mapPropsToForm } from '../propsMap'
 import { TextComponentProps } from '../defaultProps'
 import renderVue from './RenderVnode'
+import ColorPicker from './ColorPicker.vue'
+import IconSwitch from './IconSwitch.vue'
 interface FormProps {
   component: string,
   value: string,
@@ -59,7 +61,9 @@ interface FormProps {
 export default defineComponent({
     name: 'PropsTable',
     components: {
-        renderVue
+        renderVue,
+        ColorPicker,
+        IconSwitch
     },
     props: {
         props: {
@@ -70,7 +74,7 @@ export default defineComponent({
     emits:['change'],
     setup(props,context) {
         const finalProps = computed(() => {
-            return reduce(props.props, (result,value, key) => {
+            return reduce(props.props, (result: { [x: string]: FormProps },value: string, key: string) => {
                 const newKey = key as keyof TextComponentProps
                 const item = mapPropsToForm[newKey]
                 if (item) {
@@ -82,7 +86,24 @@ export default defineComponent({
                         eventName,
                         events: {
                             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            [eventName]: (e:any) => { context.emit('change', { key, value: alterTransForm ? alterTransForm(e) : e}) }
+                            [eventName]: (e:any) => {
+                                // special handling for icon switches (B/I/U)
+                                if (newKey === 'iconSwitch') {
+                                    const icon = e as string
+                                    if (icon === 'B') {
+                                        const isBold = props.props.fontWeight === 'bold'
+                                        context.emit('change', { key: 'fontWeight', value: isBold ? 'normal' : 'bold' })
+                                    } else if (icon === 'I') {
+                                        const isItalic = props.props.fontStyle === 'italic'
+                                        context.emit('change', { key: 'fontStyle', value: isItalic ? 'normal' : 'italic' })
+                                    } else if (icon === 'U') {
+                                        const isUnderline = props.props.textDecoration === 'underline'
+                                        context.emit('change', { key: 'textDecoration', value: isUnderline ? 'none' : 'underline' })
+                                    }
+                                } else {
+                                    context.emit('change', { key, value: alterTransForm ? alterTransForm(e) : e})
+                                }
+                            }
                         }
                     }
                     result[newKey as string] = newItem

@@ -1,11 +1,15 @@
+
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import eslint from 'vite-plugin-eslint'
+import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [
     vue(),
+    // vueJsx(),
+    react(),
     eslint({
     include: ['src/**/*.ts', 'src/**/*.vue'],
     fix: true
@@ -28,3 +32,7 @@ export default defineConfig({
     ]
   }
 })
+// function vueJsx(): import("vite").PluginOption {
+  // throw new Error('Function not implemented.')
+// }
+// 
