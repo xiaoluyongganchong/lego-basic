@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="tag"
+    :is="computedTag"
     :style="styleProps"
     class="l-text-component"
     @click="clickUrl"
@@ -35,7 +35,7 @@ export default defineComponent({
         return {
             styleProps,
             clickUrl,
-            tag: computedTag
+            computedTag
         }
     }
 })
