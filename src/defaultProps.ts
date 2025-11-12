@@ -43,6 +43,18 @@ export interface ImageComponentProps extends CommmonComponnetProps {
     alt: string;
     objectFit: string;
 }
+export interface ShapeComponentProps extends CommmonComponnetProps { 
+    backgroundColor: string;
+    shapeType: string;
+    shapeColor: string;
+    shapeSize: string;
+    shapeRotate: string;
+    shapePosition: string;
+    shapeDirection: string;
+    shapeRadius: string;
+    shapeSides: string;
+    shapePoints: string;
+}
 export const commonDefaultProps: CommmonComponnetProps = {
     // actions
     actionType: '',
@@ -90,6 +102,19 @@ export const imageDefaultProps: ImageComponentProps = {
     objectFit: 'contain',
     ...commonDefaultProps
 }
+export const shapeDefultProps: ShapeComponentProps = { 
+    backgroundColor: '#ffffff',
+    shapeType: 'circle',
+    shapeColor: '#000000',
+    shapeSize: '100px',
+    shapeRotate: '0',
+    shapePosition: 'center',
+    shapeDirection: 'row',
+    shapeRadius: '0',
+    shapeSides: '0',
+    shapePoints: '',
+    ...commonDefaultProps
+}
 export const isEditingProps = {
     isEditing: {
         type: Boolean,
@@ -99,6 +124,7 @@ export const isEditingProps = {
 
 export const textStylePropsName = without(Object.keys(textDefaultProps),'actionType','url','text')
 export const imageStylePropName = without(Object.keys(imageDefaultProps),'src')
+export const shapeStylePropName = without(Object.keys(shapeDefultProps),'shapeType','shapeColor','shapeSize','shapeRotate','shapePosition','shapeDirection','shapeRadius','shapeSides','shapePoints')
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const transformtoComponentProps = (props: any) => {

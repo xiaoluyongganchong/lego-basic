@@ -9,9 +9,15 @@ const useComponentCommon = (props: TextComponentProps & { isEditing?: boolean },
             window.location.href = props.url
         }
     }
+    const handleClick = () => {
+        if (props.actionType === 'url' && props.url && !props.isEditing) {
+            window.location.href = props.url
+        }
+    }
     return {
         styleProps,
-        clickUrl
+        clickUrl,
+        handleClick
     }
 }
 export default useComponentCommon
